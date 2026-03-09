@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function HomeScreen({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text>Home Screen To do</Text>
       <Button
         title="Ir para Detalhes"
         onPress={() => navigation.navigate('Detalhes')}
@@ -19,7 +19,7 @@ function HomeScreen({navigation}) {
 function DetailsScreen({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
+      <Text>Details Screen To do</Text>
       <Button
         title="Voltar para a página inicial"
         onPress={() => navigation.goBack()}
