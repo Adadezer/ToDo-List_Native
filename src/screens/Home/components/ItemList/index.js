@@ -6,9 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 function ActionButton({ onPress, icon }) {
   return (
     <Pressable onPress={onPress} style={{ padding: 8 }}>
-      {icon === "edit" && <Pencil size={24} color="#004d96" />}
-      {icon === "delete" && <Trash2 size={24} color="#004d96" />}
-      {icon === "check-circle" && <CircleCheckBig size={24} color="#004d96" />}
+      {icon === "edit" && <Pencil size={21} color="#004d96" />}
+      {icon === "delete" && <Trash2 size={21} color="#004d96" />}
+      {icon === "check-circle" && <CircleCheckBig size={21} color="#004d96" style={{ marginRight: 5 }} />}
     </Pressable>
   );
 }
