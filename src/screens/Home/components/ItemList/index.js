@@ -19,7 +19,6 @@ function ItemList({ item, index, completeItemPress, removeItemPress }) {
   const navigation = useNavigation();
 
   const handleClickEdit = () => {
-    // Alert.alert("O botão Editar foi clicado, funcionou!");
     navigation.navigate("Editar", { item });
   }
 

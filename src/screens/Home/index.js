@@ -4,9 +4,10 @@ import { Button, FlatList, Text, View } from "react-native";
 import ItemList from "./components/ItemList";
 import EmptyList from "./components/EmptyList";
 import styles from "./styles";
+import useToDoList from "../../hooks/useToDoList";
+
 function Home() {
-  const [items, setItems] = useState([]);
-  const [completedItems, setCompletedItems] = useState([]);
+  const { items, completedItems, addItem, completeItem, removeItem } = useToDoList();
   const [showCompletedItems, setShowCompletedItems] = useState(false);
 
   const flatListRef = useRef(null);
@@ -14,57 +15,6 @@ function Home() {
   const handleShowCompletedItems = () => {
     setShowCompletedItems(!showCompletedItems);
   }
-
-  const addItem = () => {
-    setItems([
-      ...items,
-      {
-        name: `item ${items.length + 1}`,
-        description: `Descrição do item ${items.length + 1}`,
-        done: false
-      }
-    ])
-  }
-
-  const completeItem = ({ item, index }) => {
-    // se estiver na lista normal
-    if (!item.done) {
-      // remove da lista normal
-      setItems(prevItems => prevItems.filter((_, i) => i !== index));
-
-      // adiciona nos concluídos
-      setCompletedItems(prevCompleted => [
-        ...prevCompleted,
-        { ...item, done: true }
-      ]);
-
-    } else {
-
-      // remove da lista de concluídos
-      setCompletedItems(prevCompleted =>
-        prevCompleted.filter((_, i) => i !== index)
-      );
-
-      // adiciona de volta na lista normal
-      setItems(prevItems => [
-        ...prevItems,
-        { ...item, done: false }
-      ]);
-    }
-  };
-
-   const removeItem = ({ item, index }) => {
-    // se estiver na lista normal
-    if (!item.done) {
-      // remove da lista normal
-      setItems(prevItems => prevItems.filter((_, i) => i !== index));
-    }
-
-    // remove da lista de concluídos
-      setCompletedItems(prevCompleted =>
-        prevCompleted.filter((_, i) => i !== index)
-      );
-  };
 
   return (
     <SafeAreaView style={styles.container}>
