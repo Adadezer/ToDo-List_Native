@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, FlatList, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import ItemList from "./components/ItemList";
 import EmptyList from "./components/EmptyList";
 import styles from "./styles";
@@ -41,16 +41,20 @@ function Home() {
       />
 
 
-      <View style={{gap: 10}}> 
-        <Button
-          title={showCompletedItems ? "Mostrar tarefas pendentes" : "Mostrar tarefas concluídas"}
-          onPress={handleShowCompletedItems}
-        />
+      <View style={{ gap: 10, marginHorizontal: 20 }}>
 
-        <Button
-          title="Clique para adicionar uma atividade"
-          onPress={addItem}
-        />
+        <Pressable onPress={handleShowCompletedItems} style={styles.buttons}>
+          <Text style={styles.buttonsText}>
+            {showCompletedItems
+              ? "Mostrar tarefas pendentes"
+              : "Mostrar tarefas concluídas"}
+          </Text>
+        </Pressable>
+
+        <Pressable onPress={addItem} style={styles.buttons}>
+          <Text style={styles.buttonsText}> Clique para adicionar uma atividade </Text>
+        </Pressable>
+
       </View>
     </SafeAreaView>
   );

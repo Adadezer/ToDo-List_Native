@@ -5,53 +5,68 @@ const useToDoList = () => {
   const [items, setItems] = useAtom(atoms.items);
   const [completedItems, setCompletedItems] = useAtom(atoms.completedItems);
 
-  const addItem = () => {
-    setItems(prev => [
-      ...prev,
+ const addItem = () => {
+    setItems([
+      ...items,
       {
-        name: `item ${prev.length + 1}`,
-        description: `Descrição do item ${prev.length + 1}`,
+        name: `item ${items.length + 1}`,
+        description: `Descrição do item ${items.length + 1}`,
         done: false
       }
-    ]);
-  };
+    ])
+  }
 
   const completeItem = ({ item, index }) => {
+    // se estiver na lista normal
     if (!item.done) {
-      setItems(prev => prev.filter((_, i) => i !== index));
+      // remove da lista normal
+      setItems(prevItems => prevItems.filter((_, i) => i !== index));
 
-      setCompletedItems(prev => [
-        ...prev,
+      // adiciona nos concluídos
+      setCompletedItems(prevCompleted => [
+        ...prevCompleted,
         { ...item, done: true }
       ]);
+
     } else {
-      setCompletedItems(prev =>
-        prev.filter((_, i) => i !== index)
+
+      // remove da lista de concluídos
+      setCompletedItems(prevCompleted =>
+        prevCompleted.filter((_, i) => i !== index)
       );
 
-      setItems(prev => [
-        ...prev,
+      // adiciona de volta na lista normal
+      setItems(prevItems => [
+        ...prevItems,
         { ...item, done: false }
       ]);
     }
   };
 
-  const removeItem = ({ item, index }) => {
+   const removeItem = ({ item, index }) => {
+    // se estiver na lista normal
     if (!item.done) {
-      setItems(prev => prev.filter((_, i) => i !== index));
-    } else {
-      setCompletedItems(prev =>
-        prev.filter((_, i) => i !== index)
-      );
+      // remove da lista normal
+      setItems(prevItems => prevItems.filter((_, i) => i !== index));
     }
+
+    // remove da lista de concluídos
+      setCompletedItems(prevCompleted =>
+        prevCompleted.filter((_, i) => i !== index)
+      );
   };
+
+  const editItem = ({item, newContent}) => {
+    setItems(prevItems => prevItems.map(i => i === item ? {...i, ...newContent} : i));
+  }
 
   return {
     items,
     completedItems,
     addItem,
     completeItem,
-    removeItem
+    removeItem,
+    editItem
   };
 };
 
